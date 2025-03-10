@@ -9,7 +9,7 @@ Take My Stuff is a cross-platform mobile marketplace app built with Angular and 
 
 ## Screenshots
 
-![Login, Create Account, and Store page](https://res.cloudinary.com/dnwasepdv/image/upload/w_2048/v1741624978/git/take-my-stuff/group-1_bsy3gx.png)
+![Login, Create Account, and Store page](https://res.cloudinary.com/dnwasepdv/image/upload/w_2048/v1741624978/git/take-my-stuff/group-1_bnx3gt.png)
 
 ![Listing and Request page](https://res.cloudinary.com/dnwasepdv/image/upload/w_2048/v1741624971/git/take-my-stuff/group-2_ckxdqm.png)
 
