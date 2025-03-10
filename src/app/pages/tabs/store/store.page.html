@@ -1,0 +1,95 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="app-heading-xl">Store</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/tabs/search">
+        <ion-icon name="search" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="isLoading" [fullscreen]="true">
+  <div class="flex size-full items-center justify-center">
+    <ion-spinner color="primary" />
+  </div>
+</ion-content>
+
+<ion-content *ngIf="!isLoading" [fullscreen]="true">
+  <swiper-container
+    [freeMode]="true"
+    [spaceBetween]="16"
+    [slidesOffsetBefore]="24"
+    [slidesOffsetAfter]="24"
+    [slidesPerView]="'auto'"
+    class="mt-3"
+  >
+    <swiper-slide
+      (click)="resetFilter()"
+      class="flex w-24 cursor-pointer flex-col items-center justify-center truncate rounded-lg px-3 py-3 transition"
+      [ngClass]="{'text-white bg-primary-shade': !filterCategory, 'text-dark-tint dark:text-dark-shade dark:bg-light-shade bg-light-tint': filterCategory}"
+    >
+      <img
+        src="{{getStorageImageSrc('categories','share.png')}}"
+        alt=""
+        class="aspect-square w-10 object-contain"
+      />
+      <span class="mt-2 truncate text-nowrap text-xs font-medium">
+        For You
+      </span>
+    </swiper-slide>
+
+    <swiper-slide
+      *ngFor="let category of categories"
+      (click)="setFilter(category)"
+      class="flex w-24 cursor-pointer flex-col items-center justify-center truncate rounded-lg px-3 py-3 transition"
+      [ngClass]="{'text-white bg-primary-shade': filterCategory?.id === category.id, 'text-dark-tint dark:text-dark-shade dark:bg-light-shade bg-light-tint': filterCategory?.id !== category.id}"
+    >
+      <img
+        src="{{getStorageImageSrc('categories',category.imageId)}}"
+        alt=""
+        class="aspect-square w-10 object-contain"
+      />
+      <span class="mt-2 truncate text-nowrap text-xs font-medium">
+        {{category.shortLabel}}
+      </span>
+    </swiper-slide>
+  </swiper-container>
+
+  <div class="mb-20 mt-6 grid items-stretch gap-6 px-6 sm:grid-cols-2">
+    <a
+      *ngFor="let listing of filteredListings"
+      [routerLink]="['/listings', listing.id]"
+      class="flex flex-col overflow-hidden rounded-md border dark:border-light-shade dark:bg-light-shade"
+    >
+      <div class="aspect-square size-full bg-light-tint">
+        <img
+          src="{{getStorageImageSrc('images',listing.imageIds[0])}}"
+          alt=""
+          class="size-full object-cover"
+        />
+      </div>
+
+      <div
+        class="flex flex-col justify-end border-t px-4 py-5 dark:border-light-shade dark:bg-light-shade"
+      >
+        <h2 class="line-clamp-2 text-pretty text-sm leading-tight">
+          {{listing.title}}
+        </h2>
+        <h2 class="mt-1.5 text-xl">
+          AED
+          <span class="font-semibold">{{listing.price.toFixed(2)}}</span>
+        </h2>
+        <p
+          class="mt-1 inline-flex items-center text-sm text-neutral-600 dark:text-neutral-400"
+        >
+          {{getSellerAddress(listing.sellerId)}}
+          <ion-icon
+            name="navigate-circle"
+            class="ml-1.5 shrink-0 text-xl text-success-default"
+          />
+        </p>
+      </div>
+    </a>
+  </div>
+</ion-content>

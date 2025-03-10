@@ -1,0 +1,58 @@
+<ion-progress-bar
+  *ngIf="loadingService.loading"
+  type="indeterminate"
+  class="app-progress-bar"
+  [@fade]
+/>
+<ion-content>
+  <div class="flex min-h-full flex-col items-stretch justify-center px-6 py-9">
+    <img
+      src="assets/illustrations/welcome.svg"
+      alt=""
+      class="mx-auto mb-12 w-full max-w-sm px-3"
+    />
+
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="mx-auto flex w-full max-w-md flex-col items-center justify-center"
+    >
+      <h2 class="app-heading-2xl">Sign in to your account</h2>
+      <p class="app-description mt-2 text-center">
+        Enter your email and password to sign in to an existing account
+      </p>
+
+      <ion-input
+        formControlName="email"
+        fill="outline"
+        label-placement="floating"
+        label="Email address"
+        type="email"
+        class="app-input mt-9"
+        [errorText]="email.hasError('required') ? 'Email address is required' : email.hasError('email') ? 'Email address is invalid' : ''"
+      />
+      <ion-input
+        formControlName="password"
+        fill="outline"
+        label-placement="floating"
+        label="Password"
+        type="password"
+        class="app-input mt-4"
+        [errorText]="password.hasError('required') ? 'Password is required' : ''"
+      />
+      <ion-button type="submit" class="app-button mt-4 w-full">
+        Sign in
+      </ion-button>
+
+      <p class="mt-9 text-center text-medium-default">
+        Don't have an account?
+        <a
+          routerLink="/register"
+          class="font-semibold text-primary-default hover:text-primary-tint"
+        >
+          Sign up
+        </a>
+      </p>
+    </form>
+  </div>
+</ion-content>

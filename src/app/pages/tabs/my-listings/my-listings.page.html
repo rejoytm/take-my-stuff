@@ -1,0 +1,51 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="app-heading-xl">My Listings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="isLoading" class="flex size-full items-center justify-center">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <div
+    *ngIf="!isLoading && !userListings.length"
+    class="flex size-full items-center justify-center text-center"
+  >
+    <p class="text-medium-shade dark:text-medium-tint">No listings found.</p>
+  </div>
+
+  <div *ngIf="!isLoading && userListings.length" class="px-6 pb-20 pt-3">
+    <ion-list class="app-list">
+      <ion-item
+        *ngFor="let listing of userListings"
+        routerLink="/edit-listing"
+        [queryParams]="{id: listing.id}"
+        class="app-item"
+        tabindex="-1"
+      >
+        <div slot="start">
+          <app-image-thumbnail src="{{ getImageSrc(listing.imageIds[0]) }}" />
+        </div>
+
+        <ion-label class="truncate">
+          <h3>{{ listing.title }}</h3>
+          <p class="inline-flex items-center">
+            AED {{ listing.price.toFixed(2)}}
+          </p>
+        </ion-label>
+
+        <ion-buttons slot="end">
+          <ion-button size="small">
+            <ion-icon
+              slot="icon-only"
+              name="chevron-forward"
+              class="text-neutral-500 dark:text-neutral-400"
+            />
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

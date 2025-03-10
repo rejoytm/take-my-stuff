@@ -1,0 +1,23 @@
+<ion-tabs>
+  <app-fab-bar slot="bottom">
+    <ion-tab-button tab="store" slot="left">
+      <ion-icon name="storefront" />
+    </ion-tab-button>
+
+    <ion-tab-button tab="requests" slot="left">
+      <ion-icon name="chatbubble-ellipses" />
+    </ion-tab-button>
+
+    <ion-fab-button routerLink="/create-listing" slot="middle">
+      <ion-icon name="add-outline" class="[--ionicon-stroke-width:48px]" />
+    </ion-fab-button>
+
+    <ion-tab-button tab="my-listings" slot="right">
+      <ion-icon name="file-tray"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="profile" slot="right">
+      <ion-icon name="person" />
+    </ion-tab-button>
+  </app-fab-bar>
+</ion-tabs>

@@ -1,0 +1,77 @@
+<label *ngIf="label" class="app-label">{{ label }}</label>
+
+<p *ngIf="helperText" class="app-input-description">
+  {{ helperText }}
+</p>
+
+<p
+  *ngIf="errorText"
+  class="app-input-description error-text !text-danger-default"
+>
+  {{ errorText }}
+</p>
+
+<ion-list
+  *ngIf="images.length || uploadingImages.length"
+  lines="inset"
+  class="app-list mt-3"
+>
+  <ion-reorder-group [disabled]="false" (ionItemReorder)="reorderImage($event)">
+    <ion-item *ngFor="let image of images" tabindex="-1" class="app-item">
+      <div slot="start">
+        <ion-reorder>
+          <app-image-thumbnail src="{{ getImageSrc(image) }}" />
+        </ion-reorder>
+      </div>
+
+      <ion-label class="truncate">
+        <h3>{{ image }}</h3>
+        <p class="inline-flex items-center">
+          <ion-icon name="cloud-done" class="mr-1.5" />
+          Saved
+        </p>
+      </ion-label>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="deleteImage(image)" color="danger" size="small">
+          <ion-icon slot="icon-only" name="trash-outline" class="text-xl" />
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-reorder-group>
+
+  <ion-item *ngFor="let uploadableImage of uploadingImages" class="app-item">
+    <div slot="start">
+      <app-image-thumbnail src="{{ uploadableImage.src }}" />
+    </div>
+
+    <ion-label class="truncate">
+      <h3>{{ uploadableImage.id }}</h3>
+      <p class="inline-flex items-center">
+        <ion-icon name="cloud-upload" class="mr-1.5" />
+        Uploading
+      </p>
+    </ion-label>
+
+    <ion-spinner color="primary" slot="end" class="mr-2 size-6" />
+  </ion-item>
+</ion-list>
+
+<button
+  type="button"
+  (click)="pickImage()"
+  class="upload-button mt-3 flex min-h-48 w-full flex-col items-center justify-center rounded-md p-12 ring-1 ring-inset ring-light-shade focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-default dark:ring-light-tint"
+>
+  <div
+    class="flex aspect-square size-12 items-center justify-center rounded-full bg-light-tint"
+  >
+    <ion-icon name="cloud-upload" class="text-2xl text-dark-tint opacity-90" />
+  </div>
+
+  <p class="mt-4 text-center text-sm text-medium-default">
+    <span class="font-medium text-dark-tint opacity-90"> Click to choose </span>
+    <br />
+    or drag and drop an image
+    <br />
+  </p>
+</button>

@@ -1,0 +1,43 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title> <h1 class="app-heading-xl">Requests</h1></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="chat px-6">
+    <div
+      *ngFor="let message of messages"
+      class="message"
+      [ngClass]="{mine: isCurrentUserMessage(message.senderId), others: !isCurrentUserMessage(message.senderId) }"
+    >
+      <div class="header">
+        <span class="sender">{{getUserName(message.senderId)}}</span>
+        <span class="date"> {{formatTimestamp(message.sentAt)}} </span>
+      </div>
+      <p class="content">{{message.content}}</p>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer
+  class="ion-no-border bg-gradient-to-b from-transparent to-background"
+>
+  <div
+    class="flex items-center gap-3 bg-gradient-to-b from-transparent via-background px-4 py-3 pb-20"
+  >
+    <ion-textarea
+      [(ngModel)]="newMessageContent"
+      rows="1"
+      autoGrow="true"
+      class="app-input bg-background"
+      fill="outline"
+      placeholder="Type a message"
+      label-placement="stacked"
+    >
+      <button (click)="sendMessage()" slot="end">
+        <ion-icon name="send" size="small" />
+      </button>
+    </ion-textarea>
+  </div>
+</ion-footer>

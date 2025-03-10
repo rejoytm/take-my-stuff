@@ -1,0 +1,129 @@
+<ion-progress-bar
+  *ngIf="loadingService.loading"
+  type="indeterminate"
+  class="app-progress-bar"
+  [@fade]
+/>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar class="bg-primary-default">
+    <ion-buttons slot="start">
+      <ion-button
+        (click)="goToPreviousStep()"
+        [disabled]="swiperInstance?.isBeginning"
+      >
+        <ion-icon slot="icon-only" name="arrow-back-outline" />
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close" />
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <swiper-container
+    #swiper
+    (afterinit)="swiperReady()"
+    [allowTouchMove]="false"
+  >
+    <swiper-slide class="px-6 py-3" [inert]="swiperInstance?.activeIndex !== 0">
+      <h2 class="app-heading-2xl">Create your account</h2>
+      <p class="app-description mt-3">
+        Start by filling in the following details. Your email address will be
+        kept confidential.
+      </p>
+      <form [formGroup]="form">
+        <ion-input
+          formControlName="name"
+          errorText="{{ name.hasError('required') ? 'Name is required' : ''}}"
+          type="text"
+          label="Name"
+          label-placement="floating"
+          fill="outline"
+          class="app-input mt-9"
+        />
+        <ion-input
+          formControlName="email"
+          errorText="{{ email.hasError('required') ? 'Email address is required' : email.hasError('email') ? 'Email address is invalid' : ''}}"
+          type="email"
+          label="Email address"
+          label-placement="floating"
+          fill="outline"
+          class="app-input mt-4"
+        />
+        <ion-input
+          formControlName="password"
+          errorText="{{ password.hasError('required') ? 'Password is required' : password.hasError('minlength') ? 'Password must have at least 8 characters' : '' }}"
+          type="password"
+          label="Password"
+          label-placement="floating"
+          fill="outline"
+          class="app-input mt-4"
+        />
+      </form>
+    </swiper-slide>
+
+    <swiper-slide class="px-6 py-3" [inert]="swiperInstance?.activeIndex !== 1">
+      <h2 class="app-heading-2xl">Add your location</h2>
+      <p class="app-description mt-3">
+        Select the location where buyers can pick up items from you.
+      </p>
+      <ion-input
+        [(ngModel)]="location.address"
+        label="Pickup address"
+        label-placement="floating"
+        fill="outline"
+        class="app-input mt-9"
+      />
+      <div
+        id="map"
+        class="mt-4 flex aspect-[4/5] w-full items-center justify-center overflow-hidden rounded-xl bg-medium-tint p-6 text-center font-medium text-white"
+      ></div>
+
+      <ion-button
+        (click)="detectAddressAndUpdateMap()"
+        class="app-button small mt-4 w-full"
+        fill="outline"
+      >
+        <ion-icon slot="start" name="locate" />
+        Use My Location
+      </ion-button>
+    </swiper-slide>
+
+    <swiper-slide class="px-6 py-3" [inert]="swiperInstance?.activeIndex !== 2">
+      <h2 class="app-heading-2xl">Set up your pickup times</h2>
+      <p class="app-description mt-3">
+        Specify the pickup times to inform buyers of when they can collect items
+        from you.
+      </p>
+      <app-availability-picker class="mt-9" [availability]="availability">
+      </app-availability-picker>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>
+
+<ion-footer
+  id="footer"
+  class="ion-no-border bg-gradient-to-b to-primary-default"
+>
+  <div
+    class="flex flex-col bg-gradient-to-b from-transparent to-background px-6 py-3"
+  >
+    <ion-button
+      *ngIf="!swiperInstance?.isEnd"
+      (click)="goToNextStep()"
+      class="app-button w-full"
+      [disabled]="isLoading || isFauxLoading"
+    >
+      Continue
+      <ion-icon slot="end" name="arrow-forward-outline" />
+    </ion-button>
+    <ion-button
+      *ngIf="swiperInstance?.isEnd"
+      (click)="onSubmit()"
+      class="app-button w-full"
+    >
+      Create account
+    </ion-button>
+  </div>
+</ion-footer>

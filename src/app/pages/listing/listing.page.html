@@ -1,0 +1,102 @@
+<ion-header class="ion-no-border absolute inset-x-0 top-0">
+  <ion-toolbar class="[--background:transparent]">
+    <ion-buttons slot="end" class="p-2">
+      <ion-button
+        routerLink="/tabs"
+        routerDirection="back"
+        class="rounded-full backdrop-blur-lg ![--background:var(--ion-background-color)]"
+      >
+        <ion-icon name="close" slot="icon-only" class="text-dark-default" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="listing">
+    <swiper-container class="app-swiper" [pagination]="{clickable: true}">
+      <swiper-slide *ngFor="let imageId of listing.imageIds">
+        <img
+          src="{{getStorageImageSrc('images', imageId)}}"
+          alt=""
+          class="aspect-square size-full bg-light-shade object-cover"
+        />
+      </swiper-slide>
+    </swiper-container>
+
+    <div class="my-9 px-6">
+      <h1 class="leading-tight">{{listing.title}}</h1>
+      <h2 class="mt-1 flex items-end text-2xl">
+        <span class="mr-1.5 text-lg">AED</span>
+        <span class="font-semibold">{{listing.price.toFixed(2)}}</span>
+      </h2>
+      <p
+        class="mt-4 text-pretty text-dark-tint opacity-80 dark:text-dark-shade"
+      >
+        {{listing.description}}
+      </p>
+
+      <div
+        *ngIf="seller"
+        class="mt-9 overflow-hidden rounded-lg bg-card shadow-lg"
+      >
+        <div class="bg-light-tint px-5 py-4 dark:bg-white/5">
+          <h2
+            class="text-sm font-semibold uppercase tracking-wide text-medium-shade"
+          >
+            Sold By
+          </h2>
+          <p class="mt-2 text-lg font-semibold">{{seller.name}}</p>
+          <p
+            class="inline-flex items-center text-base text-dark-tint dark:text-dark-shade"
+          >
+            {{seller.location.address}}
+            <ion-icon
+              name="navigate-circle"
+              class="ml-1.5 text-success-default"
+            />
+          </p>
+        </div>
+
+        <div class="px-5 py-4">
+          <h2
+            class="mt-2 text-sm font-semibold uppercase tracking-wide text-medium-shade"
+          >
+            Pickup Hours
+          </h2>
+          <div *ngIf="seller.availability">
+            <ion-list lines="full" class="mt-2 py-0">
+              <ng-container *ngFor="let day of days">
+                <ng-container *ngIf="seller.availability[day.value]">
+                  <ion-item class="app-item [--padding-start:8px]">
+                    <ion-icon name="time-outline" class="mr-3" />
+                    <span>{{ day.label }}</span>
+                    <span slot="end" class="text-medium-shade">
+                      {{ formatAvailabilityForDay(seller.availability,
+                      day.value)}}
+                    </span>
+                  </ion-item>
+                </ng-container>
+              </ng-container>
+            </ion-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="bg-gradient-to-b from-transparent to-background px-6 py-3">
+    <ion-button
+      *ngIf="seller"
+      routerLink="/navigate"
+      [queryParams]="{ latitude: seller.location.coordinates.latitude, longitude: seller.location.coordinates.longitude }"
+      class="app-button w-full"
+      [@fade]
+    >
+      <ion-icon name="navigate" slot="start" />
+      Pickup Item
+    </ion-button>
+  </div>
+</ion-footer>

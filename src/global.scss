@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Ionic Dark Mode */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+@import "./theme/fonts.scss";
+
+:root {
+  .app-heading-2xl {
+    @apply text-2xl font-semibold tracking-tight text-dark-default;
+  }
+
+  .app-heading-xl {
+    @apply text-xl font-semibold tracking-tight text-dark-default;
+  }
+
+  .app-description {
+    @apply text-pretty leading-snug text-medium-shade dark:text-medium-tint;
+  }
+
+  .app-button,
+  .app-input,
+  .app-select {
+    @apply min-h-[46px];
+  }
+
+  .app-button {
+    --padding-top: 14px;
+    --padding-bottom: 14px;
+    --padding-start: 24px;
+    --padding-end: 24px;
+    --border-radius: 999px;
+    @apply font-semibold normal-case tracking-normal transition;
+  }
+
+  .app-button.small {
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    @apply min-h-[42px];
+  }
+
+  .app-input,
+  .app-select {
+    --border-radius: 6px;
+  }
+
+  .app-input:not(.has-focus),
+  .app-select:not(.ion-focused):not(.select-expanded) {
+    --border-color: var(--ion-color-light-shade);
+    @media (prefers-color-scheme: dark) {
+      --border-color: var(--ion-color-light-tint);
+    }
+  }
+
+  .app-select {
+    @apply text-dark-tint dark:text-dark-shade;
+  }
+
+  .app-select:is(.ion-touched):is(.ion-invalid) {
+    --border-color: var(--ion-color-danger);
+    @apply text-danger-default;
+  }
+
+  .app-input.input-label-placement-floating .label-text-wrapper,
+  .app-input.textarea-label-placement-floating .label-text-wrapper {
+    @apply translate-y-[12px] text-dark-tint dark:text-dark-shade;
+  }
+
+  .app-input .native-input {
+    @apply text-dark-default dark:text-dark-shade;
+  }
+
+  .app-input.ion-untouched .input-bottom,
+  .app-input.ion-untouched .textarea-bottom {
+    display: none;
+  }
+
+  .app-input,
+  .app-select {
+    --highlight-color-valid: var(--ion-color-primary);
+  }
+
+  .app-label {
+    @apply px-4 text-dark-tint dark:text-dark-shade;
+  }
+
+  .app-input-description {
+    @apply px-4 pt-[5px] text-xs text-medium-shade;
+  }
+
+  .app-toast {
+    --border-radius: 10px;
+    --start: 20px;
+    --end: 20px;
+  }
+
+  .app-progress-bar {
+    @apply absolute z-10;
+  }
+
+  .app-list {
+    @apply rounded-md border border-light-shade dark:border-none;
+  }
+
+  .app-item {
+    --background-hover: transparent;
+    --background-focused: var(--ion-color-medium-tint);
+    --border-color: theme(colors.neutral.200);
+    @media (prefers-color-scheme: dark) {
+      --border-color: theme(colors.neutral.800);
+    }
+    @apply opacity-100 shadow-none;
+  }
+
+  .app-item:last-child {
+    --border-width: 0;
+    --inner-border-width: 0;
+  }
+
+  app-image-picker:is(.ng-untouched) .error-text {
+    display: none;
+  }
+
+  app-image-picker:is(.ng-touched):is(.ng-invalid) .app-label {
+    @apply text-danger-default;
+  }
+
+  app-image-picker:is(.ng-touched):is(.ng-invalid) .upload-button {
+    @apply ring-danger-default;
+  }
+
+  .app-swiper {
+    --swiper-theme-color: var(--ion-color-primary-shade);
+  }
+}

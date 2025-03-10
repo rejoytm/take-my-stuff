@@ -1,0 +1,12 @@
+{
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "@ionic/angular/common",
+    "@ionic/angular/standalone"
+  ],
+  "files.associations": {
+    "*.njk": "html",
+    "*.html": "html",
+    "stdlib.h": "c",
+    "semaphore.h": "c"
+  }
+}

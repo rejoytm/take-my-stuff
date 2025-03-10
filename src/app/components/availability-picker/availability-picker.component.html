@@ -1,0 +1,19 @@
+<div [ngClass]="class" class="space-y-6">
+  <div *ngFor="let day of days">
+    <ion-select
+      [selectedText]="getSelectedTextForDay(day.value)"
+      label-placement="stacked"
+      multiple="true"
+      label="{{ day.label }}"
+      fill="outline"
+      placeholder="Select time"
+      class="app-select"
+      [value]="availability[day.value] || []"
+      (ionChange)="onSelectChange(day.value, $event.detail.value)"
+    >
+      <ion-select-option *ngFor="let hour of hours" [value]="hour.value">
+        {{ hour.label }}
+      </ion-select-option>
+    </ion-select>
+  </div>
+</div>

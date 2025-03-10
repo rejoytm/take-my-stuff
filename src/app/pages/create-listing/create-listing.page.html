@@ -1,0 +1,98 @@
+<ion-progress-bar
+  *ngIf="loadingService.loading"
+  type="indeterminate"
+  class="app-progress-bar"
+  [@fade]
+/>
+
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon slot="start" name="create" class="-mr-3 ml-5 text-2xl" />
+    <ion-title>
+      <h1 class="app-heading-xl">New Listing</h1>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button default-href="/tabs/store" icon="close" />
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="px-6 py-3">
+    <form
+      id="listingForm"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="mt-3"
+    >
+      <ion-input
+        formControlName="title"
+        errorText="{{title.hasError('required') ? 'Title is required' : ''}}"
+        label="Title"
+        label-placement="floating"
+        fill="outline"
+        class="app-input"
+      />
+      <ion-textarea
+        formControlName="description"
+        errorText="{{description.hasError('required') ? 'Description is required' : ''}}"
+        label="Description"
+        label-placement="floating"
+        fill="outline"
+        autoGrow="true"
+        class="app-input mt-5"
+        rows="6"
+      />
+      <ion-input
+        formControlName="price"
+        errorText="{{price.hasError('required') ? 'Price is required' : price.hasError('min') ? 'Price should be at least AED 1.00' : ''}}"
+        type="number"
+        min="1"
+        label="Price"
+        label-placement="floating"
+        placeholder="0.00"
+        fill="outline"
+        class="app-input mt-5"
+      >
+      </ion-input>
+
+      <ion-select
+        formControlName="categoryId"
+        label="Category"
+        label-placement="fixed"
+        placeholder="Select"
+        fill="outline"
+        class="app-select mt-5"
+      >
+        <ion-select-option
+          *ngFor="let category of categoryOptions"
+          [value]="category.id"
+        >
+          {{ category.label }}
+        </ion-select-option>
+      </ion-select>
+      <p
+        *ngIf="categoryId.touched && categoryId.hasError('required')"
+        class="app-input-description !text-danger-default"
+      >
+        Category is required
+      </p>
+
+      <div class="mt-5">
+        <app-image-picker
+          formControlName="imageIds"
+          label="Images"
+          errorText="{{imageIds.hasError('required') ? 'Select at least 1 image' : ''}}"
+        />
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="bg-gradient-to-b from-transparent to-background px-6 py-3">
+    <ion-button type="submit" form="listingForm" class="app-button w-full">
+      Create listing
+    </ion-button>
+  </div>
+</ion-footer>

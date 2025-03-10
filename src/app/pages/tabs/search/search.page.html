@@ -1,0 +1,32 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-searchbar
+      id="searchbar"
+      (ionInput)="onSearchbarInput($event.target.value)"
+      (ionCancel)="onSearchbarCancel()"
+      show-cancel-button="always"
+      show-clear-button="focus"
+      placeholder="Search"
+      class="ion-no-border app-input"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngIf="searchResults.length" class="app-list !border-none">
+    <ion-item
+      *ngFor="let listing of searchResults"
+      [routerLink]="['/listings', listing.id]"
+    >
+      <div slot="start">
+        <app-image-thumbnail
+          src="{{ getStorageImageSrc('images', listing.imageIds[0]) }}"
+        />
+      </div>
+      <ion-label class="truncate">
+        <h3>{{listing.title}}</h3>
+        <p class="inline-flex items-center">AED {{listing.price.toFixed(2)}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

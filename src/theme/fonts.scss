@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "Radio Canada Big";
+  src: url(../assets/fonts/RadioCanadaBig-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Radio Canada Big";
+  src: url(../assets/fonts/RadioCanadaBig-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Radio Canada Big";
+  src: url(../assets/fonts/RadioCanadaBig-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Radio Canada Big";
+  src: url(../assets/fonts/RadioCanadaBig-Bold.ttf);
+  font-weight: 700;
+}
+
+:root {
+  --ion-font-family: "Radio Canada Big";
+}
