@@ -18,14 +18,13 @@ Take My Stuff is a cross-platform mobile marketplace app built with Angular and 
 
 ## Features
 
-- **Cross-Platform**: Developed for **Web**, **iOS** and **Android** using **Angular** and **Ionic**, providing a seamless user experience on mobile devices.
-- **User Authentication**: Integrated with **Firebase Authentication**, enabling users to securely register, log in, and manage their accounts.
-- **CRUD Operations**: Users can create, read, update, and delete product listings in real-time, with data stored in **Firebase**.
-- **Image Uploads**: Efficient image storage and retrieval powered by **Google Cloud Storage**, allowing users to upload and display photos of their listings.
-- **Search and Filter**: A **store page** that lets users search and filter products based on categories and more.
-- **Real-Time Navigation**: Integration with **Google Maps API** to provide real-time navigation for item pickups.
-- **Image Carousel**: Detailed item pages feature **SwiperJS** for a smooth, interactive image carousel for product images.
-- **Request Items**: A built-in messaging feature to allow buyers and sellers to communicate directly through the app.
+- 🌐 Web, iOS, and Android support
+- 🌗 Light/Dark mode support
+- 🔒 Secure login with Firebase Auth
+- 🔍 Search and filter products easily
+- 🗺️ Real-time navigation with Google Maps API
+- 🖼️ Interactive image carousel with SwiperJS
+- 📩 Built-in messaging feature for buyers and sellers
 
 
 ## Run Locally
