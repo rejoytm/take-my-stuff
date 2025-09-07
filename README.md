@@ -32,25 +32,25 @@ Take My Stuff is a cross-platform mobile marketplace app built with Angular and 
 Clone the project
 
 ```bash
-  git clone https://github.com/rejoytm/take-my-stuff
+git clone https://github.com/rejoytm/take-my-stuff
 ```
 
 Go to the project directory
 
 ```bash
-  cd take-my-stuff
+cd take-my-stuff
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+npm install
 ```
 
 Start the server
 
 ```bash
-  npm run start
+npm run start
 ```
 
 
@@ -71,7 +71,6 @@ export const environment = {
   },
   googleMapsApiKey: '<your-google-maps-api-key>',
 };
-
 ```
 
 Make sure to replace the placeholders with your Firebase and Google Maps API credentials.
