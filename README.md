@@ -4,7 +4,7 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![Platforms](https://img.shields.io/badge/Platform-Web%20%26%20iOS%20%26%20Android-blue.svg)
 
-Take My Stuff is a cross-platform mobile marketplace app built with Angular and Ionic. It enables users to easily buy and sell used products within their local community.
+**Take My Stuff** is a cross-platform mobile marketplace app built with Angular and Ionic. It enables users to easily buy and sell used products within their local community.
 
 
 ## Screenshots
